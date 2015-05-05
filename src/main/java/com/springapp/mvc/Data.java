@@ -17,25 +17,19 @@ public class Data {
     }
 
     public boolean isFound(int id){
-        boolean answer = false;
         for (Command command : commands) {
             if (command.getId() == id) {
-                answer = true;
-                break;
+                return true;
             }
-        }
-        return answer;
+        }return false;
     }
 
     public Command getCommand(int id) {
-        Command answer = null;
         for (Command command : commands) {
             if (command.getId() == id) {
-                answer = command;
-                break;
+                return command;
             }
-        }
-        return answer;
+        }return null;
     }
 
 }

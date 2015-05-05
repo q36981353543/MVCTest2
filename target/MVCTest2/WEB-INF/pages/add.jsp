@@ -15,9 +15,9 @@
                 type: 'POST',
                 data: json,
                 contentType: 'application/json',
-                success: function(data) {
-                    alert("Input data: " + data.id + " " + data.content);
-                },
+//                success: function(data) {
+//                    alert("Input data: " + data.id + " " + data.content);
+//                },
                 error:function(data,status,er) {
                     alert("error: " + data + " status: " + status + " er:" + er);
                 }

@@ -29,10 +29,15 @@ public class Command {
 
     @Override
     public String toString() {
-        return "Command {\n" +
-                "\"id\": " + id + ",\n" +
-                "\"content\": \"" + content + "\"\n" +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("SendCommandDto{<br/> ")
+                .append("\"commandId\": ")
+                .append(id)
+                .append(",<br/>")
+                .append("\"command\": \"")
+                .append(content)
+                .append("\"<br/>}");
+        return sb.toString();
     }
 
 }
