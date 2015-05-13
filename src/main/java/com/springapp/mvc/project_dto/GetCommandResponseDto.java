@@ -2,7 +2,7 @@ package com.springapp.mvc.project_dto;
 
 import com.springapp.mvc.project_data.Command;
 
-public class GetCommandResponseDto {
+public class GetCommandResponseDto extends ResponseBase{
     private int commandId;
     private String command;
 

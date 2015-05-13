@@ -1,6 +1,7 @@
 package com.springapp.mvc.services;
 
 import com.springapp.mvc.project_dto.GetCommandResponseDto;
+import com.springapp.mvc.project_dto.ResponseBase;
 import com.springapp.mvc.project_dto.SendCommandDto;
 import com.springapp.mvc.project_data.Data;
 import com.springapp.mvc.project_data.Command;

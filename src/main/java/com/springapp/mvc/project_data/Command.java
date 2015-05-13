@@ -2,22 +2,26 @@ package com.springapp.mvc.project_data;
 
 import com.springapp.mvc.project_dto.SendCommandDto;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class Command {
     private int commandId;
     private int deviceId;
     private String command;
 
-    private static final int MIN_INDEX_VALUE = 0;
-    private static final int MAX_INDEX_VALUE = 255;
-    private static int index = MIN_INDEX_VALUE;
+    private static Map<Integer, Integer> indexMap = new LinkedHashMap<>();
+    private final int MIN_INDEX_VALUE = 0;
+    private final int MAX_INDEX_VALUE = 255;
 
     public Command(SendCommandDto sendCommandDto) {
-        if (index >= MAX_INDEX_VALUE){
-            index = MIN_INDEX_VALUE;
-        }
-        this.commandId = index++;
         this.deviceId = sendCommandDto.getDeviceId();
         this.command = sendCommandDto.getCommand();
+        if (indexMap.containsKey(this.deviceId) && indexMap.get(this.deviceId) < MAX_INDEX_VALUE){
+            this.commandId = indexMap.get(this.deviceId) +1;
+        }else{
+            this.commandId = MIN_INDEX_VALUE;
+        }indexMap.put(this.deviceId, this.commandId);
     }
 
     public int getCommandId() {
