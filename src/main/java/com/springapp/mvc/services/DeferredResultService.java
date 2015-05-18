@@ -55,7 +55,6 @@ public class DeferredResultService {
             if (entry.getKey().equals(command.getDeviceId())){
                 //show entered command in context, which wait it
                 entry.getValue().setResult(new GetCommandResponseDto(data.remove(entry.getKey())));
-                //data.remove(entry.getKey());
             }
         }return new ResponseBase(ResultCode.OK);
     }
