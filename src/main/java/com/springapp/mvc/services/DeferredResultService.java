@@ -16,11 +16,11 @@ import java.util.Map;
 @Service
 public class DeferredResultService {
     //queue with async contexts
-    private Map<String,DeferredResult<ResponseBase>> deferredResultsMap = new LinkedHashMap<>();
+    private Map<Integer,DeferredResult<ResponseBase>> deferredResultsMap = new LinkedHashMap<>();
     @Autowired
     private Data data;
 
-    public DeferredResult<ResponseBase> printCommand(final String deviceId, long timeout) {
+    public DeferredResult<ResponseBase> printCommand(final int deviceId, long timeout) {
         final long MS_TO_SEC = 1000;
         final DeferredResult<ResponseBase> deferredResult = new DeferredResult<>(timeout*MS_TO_SEC);
         Command command = data.remove(deviceId);
@@ -51,11 +51,11 @@ public class DeferredResultService {
     public ResponseBase addCommand(SendCommandDto sendCommandDto) {
         Command command = new Command(sendCommandDto);
         data.add(command);
-        for (Map.Entry<String, DeferredResult<ResponseBase>> entry : deferredResultsMap.entrySet()){
+        for (Map.Entry<Integer, DeferredResult<ResponseBase>> entry : deferredResultsMap.entrySet()){
             if (entry.getKey().equals(command.getDeviceId())){
                 //show entered command in context, which wait it
-                entry.getValue().setResult(new GetCommandResponseDto(data.remove(entry.getKey())));
-                //data.remove(entry.getKey());
+                entry.getValue().setResult(new GetCommandResponseDto(command));
+                data.remove(entry.getKey());
             }
         }return new ResponseBase(ResultCode.OK);
     }
