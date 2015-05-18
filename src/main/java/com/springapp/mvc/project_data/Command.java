@@ -7,10 +7,10 @@ import java.util.Map;
 
 public class Command {
     private int commandId;
-    private int deviceId;
+    private String deviceId;
     private String command;
 
-    private static Map<Integer, Integer> indexMap = new LinkedHashMap<>();
+    private static Map<String, Integer> indexMap = new LinkedHashMap<>();
     private final int MIN_INDEX_VALUE = 0;
     private final int MAX_INDEX_VALUE = 255;
 
@@ -32,11 +32,11 @@ public class Command {
         this.commandId = commandId;
     }
 
-    public int getDeviceId() {
+    public String getDeviceId() {
         return deviceId;
     }
 
-    public void setDeviceId(int deviceId) {
+    public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
     }
 

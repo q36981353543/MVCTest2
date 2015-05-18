@@ -18,7 +18,7 @@ public class MainController extends ExceptionService {
 
     @RequestMapping(value="/commands/{deviceId}/{timeout}", method = RequestMethod.GET)
     @ResponseBody
-    public DeferredResult<ResponseBase> printCommand(@PathVariable final int deviceId, @PathVariable long timeout) throws Exception {
+    public DeferredResult<ResponseBase> printCommand(@PathVariable final String deviceId, @PathVariable long timeout) throws Exception {
         return deferredResultService.printCommand(deviceId, timeout);
     }
 

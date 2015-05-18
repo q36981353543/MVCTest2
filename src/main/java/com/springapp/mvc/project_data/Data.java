@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Service
 public class Data {
-    private Map<Integer, Queue<Command>> commands = new LinkedHashMap<>();
+    private Map<String, Queue<Command>> commands = new LinkedHashMap<>();
     private final int MAX_QUEUE_LENGTH = 256;   //0..255
 
     public void add(Command command){
@@ -25,7 +25,7 @@ public class Data {
         }
     }
 
-    public Command remove(int deviceId){
+    public Command remove(String deviceId){
         if(commands.containsKey(deviceId) && !commands.get(deviceId).isEmpty()) {
             return commands.get(deviceId).remove();
         }else{

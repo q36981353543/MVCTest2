@@ -1,14 +1,21 @@
 package com.springapp.mvc.project_dto;
 
 public class SendCommandDto {
-    private int deviceId;
+    private String deviceId;
     private String command;
 
-    public int getDeviceId() {
+    public SendCommandDto() {}
+
+    public SendCommandDto(String deviceId, String command) {
+        this.deviceId = deviceId;
+        this.command = command;
+    }
+
+    public String getDeviceId() {
         return deviceId;
     }
 
-    public void setDeviceId(int deviceId) {
+    public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
     }
 
