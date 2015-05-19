@@ -9,12 +9,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -27,18 +28,33 @@ public class MainControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.mockMvc = webAppContextSetup(this.webApplicationContext).build();
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
     @Test
     public void testPrintCommand() throws Exception {
-        this.mockMvc.perform(get("/commands/Integer/Long"))
-                .andExpect(status().isOk());
+        MvcResult mvcResult = this.mockMvc.perform(get("/commands/test/1"))
+                .andExpect(status().isOk())
+                .andExpect(request().asyncStarted())
+                .andReturn();
+
+        this.mockMvc.perform(asyncDispatch(mvcResult))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("resultCode").value("OK"));
+    }
+
+    @Test
+    public void testPrintCommandErrorSituation() throws Exception {
+        this.mockMvc.perform(get("/commands/test/t"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("resultCode").value("ERROR"));
     }
 
     @Test
     public void testDoPost() throws Exception {
-        this.mockMvc.perform(post("/add").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+        this.mockMvc.perform(post("/add").contentType(MediaType.APPLICATION_JSON)
+                .content("{\"deviceId\":\"test\",\"command\":\"test\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("resultCode").value("OK"));
     }
 }

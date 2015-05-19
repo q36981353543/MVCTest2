@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 @Service
 public class Data {
     private Map<String, Queue<Command>> commands = new LinkedHashMap<>();
-    private final int MAX_QUEUE_LENGTH = 256;   //0..255
+    private static final int MAX_QUEUE_LENGTH = 256;   //0..255
 
     public void add(Command command){
         if(commands.containsKey(command.getDeviceId())) {

@@ -11,8 +11,8 @@ public class Command {
     private String command;
 
     private static Map<String, Integer> indexMap = new LinkedHashMap<>();
-    private final int MIN_INDEX_VALUE = 0;
-    private final int MAX_INDEX_VALUE = 255;
+    private static final int MIN_INDEX_VALUE = 0;
+    private static final int MAX_INDEX_VALUE = 255;
 
     public Command(SendCommandDto sendCommandDto) {
         this.deviceId = sendCommandDto.getDeviceId();

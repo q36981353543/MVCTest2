@@ -21,4 +21,16 @@ public class DataTest {
         data.add(new Command(new SendCommandDto("test","test")));
         Assert.assertEquals("test", data.remove("test").getDeviceId());
     }
+
+    @Test
+    public void testCorrectCommandId() throws Exception {
+        data.add(new Command(new SendCommandDto("d1","test")));
+        data.add(new Command(new SendCommandDto("d1","test")));
+        data.add(new Command(new SendCommandDto("d1","test")));
+        data.add(new Command(new SendCommandDto("d2","test")));
+        data.remove("d1").getCommandId();
+        data.remove("d2").getCommandId();
+        data.remove("d1").getCommandId();
+        Assert.assertEquals(2, data.remove("d1").getCommandId());
+    }
 }

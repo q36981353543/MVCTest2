@@ -28,3 +28,6 @@ public class MainController extends ExceptionService {
         return deferredResultService.addCommand(sendCommandDto);
     }
 }
+
+//get req url example:      http://localhost:8080/commands/d1/1
+//post req body example:    {"deviceId":"d1","command":"test"}

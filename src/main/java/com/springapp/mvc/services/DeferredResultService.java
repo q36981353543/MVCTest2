@@ -44,8 +44,7 @@ public class DeferredResultService {
                     deferredResultsMap.remove(deviceId);
                 }
             });
-        }
-        return deferredResult;
+        }return deferredResult;
     }
 
     public ResponseBase addCommand(SendCommandDto sendCommandDto) {
